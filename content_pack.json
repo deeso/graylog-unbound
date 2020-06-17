@@ -1,0 +1,517 @@
+{
+  "v": 1,
+  "id": "e851806d-f090-43dd-aec1-15b9ee8fdf72",
+  "rev": 1,
+  "name": "Unbound Patterns",
+  "summary": "Patterns for handling unbound Syslog Messages",
+  "description": "",
+  "vendor": "adam pridgen",
+  "url": "",
+  "parameters": [],
+  "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c17168d8-eeae-41d6-bccb-1c70008acd9b",
+      "data": {
+        "name": "DNS_ANSWER_5",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2ea95962-d99b-4947-acd1-59aa0e7d386f",
+      "data": {
+        "name": "DNS_RESPONSE",
+        "pattern": ";; ->>HEADER<<- opcode: %{WORD:opcode}, rcode: %{WORD:rcode}, id: %{INT:query_id}\\n;; flags: %{GREEDYDATA:flags} ; QUERY: %{INT:num_query}, ANSWER: %{INT:num_answer}, AUTHORITY: %{INT:num_authority}, ADDITIONAL: %{INT:num_additional} \\n;; QUESTION SECTION:%{TRUEGREEDYDATA: question_section}\\n;; ANSWER SECTION:%{TRUEGREEDYDATA: answer_section}\\n;; AUTHORITY SECTION:%{TRUEGREEDYDATA: authority_section}\\n;; ADDITIONAL SECTION:%{TRUEGREEDYDATA: additional_section}\\n;; MSG SIZE  rcvd: %{INT: dns_response_sz}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "40cd4789-2ad3-49a5-b93f-f995145320e1",
+      "data": {
+        "name": "DNS_ANSWER_1",
+        "pattern": "%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f7168a80-f908-4470-9f09-9bd8bce9580d",
+      "data": {
+        "name": "DNS_ANSWER_8",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4cfc4f32-d658-4eac-8b4f-e4edcc749327",
+      "data": {
+        "name": "DNS_ANSWER_10",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "17e98ca2-4655-41ab-8c49-1e8fd6b60a88",
+      "data": {
+        "name": "DNS_ANSWER_3",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "76c641ee-002d-492f-ade3-53efc5ddf670",
+      "data": {
+        "name": "DNS_ANSWER_LINE",
+        "pattern": "%{HOSTNAME:a_query}.\\s+%{INT:ttl}\\s+%{WORD:a_type}\\s+%{WORD:a_record}\\s+(?:%{IP:a_response}|%{HOSTNAME:a_response}(?:.))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "541500c8-2b73-4d40-b5b5-4c705eb8fce8",
+      "data": {
+        "name": "UNBOUND_SYSLOG_CLIENT_REQUEST",
+        "pattern": "%{UNBOUND_SYSLOG}\\s+%{HOSTNAME:dns_src}\\s+%{HOSTNAME:dns_query}(?:.)\\s+%{WORD:dns_query_record}\\s+%{WORD:dns_query_type}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2478173a-f023-4c26-9041-ca72a126a3a2",
+      "data": {
+        "name": "DNS_ANSWER_6",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "54612144-1ce6-4b46-ad9e-4cdf82aa8358",
+      "data": {
+        "name": "DNS_ANSWER_9",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0a4188f5-eba8-4ee5-81bd-9c77ab8fe30a",
+      "data": {
+        "name": "UNBOUND_SYSLOG",
+        "pattern": "%{SYSLOGHOST} %{USERNAME:daemon}: \\[%{INT:pid}:%{INT}\\] %{LOGLEVEL:log_level}:"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d7f46ffd-afd1-4995-bc4a-010298a24ff5",
+      "data": {
+        "name": "DNS_ANSWER_4",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a23cbe57-3601-4183-8727-fdf0d0641a5e",
+      "data": {
+        "name": "DNS_QUESTION_LINE",
+        "pattern": "%{HOSTNAME:q_query}(?:.)\\t%{WORD:q_type}\\t%{WORD:q_record}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "26bc8ce6-e8d2-449b-8e9e-5e654a7b363f",
+      "data": {
+        "name": "DNS_ANSWER_2",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "130d124a-0950-4f5d-a59f-df6a6eb29c8f",
+      "data": {
+        "name": "DNS_ANSWER_7",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8a855a1d-7546-4383-8ba3-b616ede387fb",
+      "data": {
+        "name": "UNBOUND_SYSLOG_RAW_RESPONSE",
+        "pattern": "%{UNBOUND_SYSLOG}\\sincoming scrubbed packet: %{DNS_RESPONSE:raw_dns_response}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "bdc9e658-87a1-4828-942b-ad84dc4156f6",
+      "data": {
+        "name": "WORD",
+        "pattern": "\\b\\w+\\b"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "67c17e56-5c8b-4eff-8c2e-df239e9cece7",
+      "data": {
+        "name": "GREEDYDATA",
+        "pattern": ".*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c9543a87-5256-4ec8-a862-a73127f52306",
+      "data": {
+        "name": "INT",
+        "pattern": "(?:[+-]?(?:[0-9]+))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a4faf155-1720-4cfd-a8c3-bc6f53877471",
+      "data": {
+        "name": "TRUEGREEDYDATA",
+        "pattern": "(.|\\r|\\n)*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3795f522-d7ce-467f-b653-14cac839a07b",
+      "data": {
+        "name": "HOSTNAME",
+        "pattern": "\\b(?:[0-9A-Za-z][0-9A-Za-z-]{0,62})(?:\\.(?:[0-9A-Za-z][0-9A-Za-z-]{0,62}))*(\\.?|\\b)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "849b9fa8-6269-4db5-a5e3-689406b2e571",
+      "data": {
+        "name": "IP",
+        "pattern": "(?:%{IPV6}|%{IPV4})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "79721c3d-0059-4850-91e2-64b66740ec33",
+      "data": {
+        "name": "SYSLOGHOST",
+        "pattern": "%{IPORHOST}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8ff5636b-b1d0-408d-8ebd-7c0306f47837",
+      "data": {
+        "name": "USERNAME",
+        "pattern": "[a-zA-Z0-9._-]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d67dac50-4ede-4b77-87d4-af2ff8216ad2",
+      "data": {
+        "name": "LOGLEVEL",
+        "pattern": "([Aa]lert|ALERT|[Tt]race|TRACE|[Dd]ebug|DEBUG|[Nn]otice|NOTICE|[Ii]nfo|INFO|[Ww]arn?(?:ing)?|WARN?(?:ING)?|[Ee]rr?(?:or)?|ERR?(?:OR)?|[Cc]rit?(?:ical)?|CRIT?(?:ICAL)?|[Ff]atal|FATAL|[Ss]evere|SEVERE|EMERG(?:ENCY)?|[Ee]merg(?:ency)?)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1fd0d047-cd70-4f76-9fc4-b720abf161ac",
+      "data": {
+        "name": "IPV6",
+        "pattern": "((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f5186485-a080-4b56-8504-8a2bca159fa1",
+      "data": {
+        "name": "IPV4",
+        "pattern": "(?<![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "adafa292-7ed5-4578-a585-e1720c28b800",
+      "data": {
+        "name": "IPORHOST",
+        "pattern": "(?:%{IP}|%{HOSTNAME})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    }
+  ]
+}
