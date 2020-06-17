@@ -288,7 +288,7 @@
       "id": "8a855a1d-7546-4383-8ba3-b616ede387fb",
       "data": {
         "name": "UNBOUND_SYSLOG_RAW_RESPONSE",
-        "pattern": "%{UNBOUND_SYSLOG}\\sincoming scrubbed packet: %{DNS_RESPONSE:raw_dns_response}"
+        "pattern": "%{UNBOUND_SYSLOG}.*%{DNS_RESPONSE:raw_dns_response}"
       },
       "constraints": [
         {
