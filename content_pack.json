@@ -1,7 +1,7 @@
 {
-  "v": 1,
+  "v": "1",
   "id": "e851806d-f090-43dd-aec1-15b9ee8fdf72",
-  "rev": 1,
+  "rev": 2,
   "name": "Unbound Patterns",
   "summary": "Patterns for handling unbound Syslog Messages",
   "description": "",
@@ -9,6 +9,550 @@
   "url": "",
   "parameters": [],
   "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "dashboard",
+        "version": "2"
+      },
+      "id": "facb93a1-e04a-48e8-b361-8aa490145e32",
+      "data": {
+        "summary": {
+          "@type": "string",
+          "@value": "Understand DNS Activity"
+        },
+        "search": {
+          "queries": [
+            {
+              "id": "400f118e-28bd-473a-8cb1-5b74355aa39f",
+              "timerange": {
+                "type": "relative",
+                "range": 300
+              },
+              "query": {
+                "type": "elasticsearch",
+                "query_string": ""
+              },
+              "search_types": [
+                {
+                  "name": "events",
+                  "timerange": {
+                    "type": "relative",
+                    "range": 7200
+                  },
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:src_ip"
+                  },
+                  "streams": [
+                    "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                  ],
+                  "id": "5f7c0398-5dac-494a-8864-b5ae85b5cf22",
+                  "type": "events",
+                  "filter": null
+                },
+                {
+                  "query": null,
+                  "name": "chart",
+                  "timerange": {
+                    "type": "relative",
+                    "range": 300
+                  },
+                  "streams": [],
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "count()",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "field": "timestamp",
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "b602e52b-8182-420b-8ea8-52754538e582",
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "field": "a_response",
+                      "limit": 15
+                    }
+                  ],
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Ascending"
+                    }
+                  ]
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:a_query AND a_record:\"PTR\" OR \"CNAME\""
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "type": "relative",
+                    "range": 28800
+                  },
+                  "streams": [
+                    "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                  ],
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "count()",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "field": "a_query",
+                      "limit": 15
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "0d12e531-7cae-4f54-887b-16fa32a82571",
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "field": "a_response",
+                      "limit": 15
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:a_query AND a_record:\"A\" OR \"AAAA\""
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "type": "relative",
+                    "range": 7200
+                  },
+                  "streams": [
+                    "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                  ],
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "count()",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "field": "timestamp",
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "29d9e6b2-53e2-442d-92c4-a21111a76aab",
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "field": "a_response",
+                      "limit": 15
+                    }
+                  ],
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:src_ip"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "type": "relative",
+                    "range": 7200
+                  },
+                  "streams": [
+                    "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                  ],
+                  "series": [
+                    {
+                      "type": "count",
+                      "id": "count()",
+                      "field": null
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "field": "timestamp",
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "6ec5fe3d-c4f8-429a-af7d-d4d160142899",
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "field": "src_ip",
+                      "limit": 15
+                    }
+                  ],
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [],
+          "requires": {},
+          "owner": "admin",
+          "created_at": "2020-06-18T03:38:02.863Z"
+        },
+        "created_at": "2020-06-18T01:48:29.431Z",
+        "requires": {},
+        "state": {
+          "400f118e-28bd-473a-8cb1-5b74355aa39f": {
+            "selected_fields": null,
+            "static_message_list_id": null,
+            "titles": {
+              "widget": {
+                "22d6b91f-0e3e-4fb4-a372-24264537aa19": "Number of Answer Responses",
+                "967e271c-910a-4867-90ad-9244176ad59b": "Number of DNS Queries by Source IP",
+                "5958aa37-e2b7-4833-8b64-a4b2fdb07aa0": "DNS Address Responses",
+                "366ce964-4b22-452a-bd49-101342773875": "DNS Address Responses (copy)"
+              }
+            },
+            "widgets": [
+              {
+                "id": "22d6b91f-0e3e-4fb4-a372-24264537aa19",
+                "type": "aggregation",
+                "filter": null,
+                "timerange": {
+                  "type": "relative",
+                  "range": 300
+                },
+                "query": null,
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "event_annotation": false,
+                  "row_pivots": [
+                    {
+                      "field": "timestamp",
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": null
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": true,
+                  "column_pivots": [
+                    {
+                      "field": "a_response",
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "spline"
+                  },
+                  "formatting_settings": null,
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Ascending"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "967e271c-910a-4867-90ad-9244176ad59b",
+                "type": "aggregation",
+                "filter": null,
+                "timerange": {
+                  "type": "relative",
+                  "range": 7200
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_:src_ip"
+                },
+                "streams": [
+                  "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                ],
+                "config": {
+                  "visualization": "line",
+                  "event_annotation": true,
+                  "row_pivots": [
+                    {
+                      "field": "timestamp",
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": null
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": true,
+                  "column_pivots": [
+                    {
+                      "field": "src_ip",
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "spline"
+                  },
+                  "formatting_settings": null,
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "5958aa37-e2b7-4833-8b64-a4b2fdb07aa0",
+                "type": "aggregation",
+                "filter": null,
+                "timerange": {
+                  "type": "relative",
+                  "range": 7200
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_:a_query AND a_record:\"A\" OR \"AAAA\""
+                },
+                "streams": [
+                  "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                ],
+                "config": {
+                  "visualization": "line",
+                  "event_annotation": false,
+                  "row_pivots": [
+                    {
+                      "field": "timestamp",
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": null
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": true,
+                  "column_pivots": [
+                    {
+                      "field": "a_response",
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "spline"
+                  },
+                  "formatting_settings": null,
+                  "sort": [
+                    {
+                      "type": "pivot",
+                      "field": "timestamp",
+                      "direction": "Descending"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "366ce964-4b22-452a-bd49-101342773875",
+                "type": "aggregation",
+                "filter": null,
+                "timerange": {
+                  "type": "relative",
+                  "range": 28800
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_:a_query AND a_record:\"PTR\" OR \"CNAME\""
+                },
+                "streams": [
+                  "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+                ],
+                "config": {
+                  "visualization": "heatmap",
+                  "event_annotation": false,
+                  "row_pivots": [
+                    {
+                      "field": "a_query",
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "count()"
+                    }
+                  ],
+                  "rollup": true,
+                  "column_pivots": [
+                    {
+                      "field": "a_response",
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": null,
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              }
+            ],
+            "widget_mapping": {
+              "967e271c-910a-4867-90ad-9244176ad59b": [
+                "6ec5fe3d-c4f8-429a-af7d-d4d160142899",
+                "5f7c0398-5dac-494a-8864-b5ae85b5cf22"
+              ],
+              "22d6b91f-0e3e-4fb4-a372-24264537aa19": [
+                "b602e52b-8182-420b-8ea8-52754538e582"
+              ],
+              "5958aa37-e2b7-4833-8b64-a4b2fdb07aa0": [
+                "29d9e6b2-53e2-442d-92c4-a21111a76aab"
+              ],
+              "366ce964-4b22-452a-bd49-101342773875": [
+                "0d12e531-7cae-4f54-887b-16fa32a82571"
+              ]
+            },
+            "positions": {
+              "967e271c-910a-4867-90ad-9244176ad59b": {
+                "col": 1,
+                "row": 12,
+                "height": 4,
+                "width": "Infinity"
+              },
+              "22d6b91f-0e3e-4fb4-a372-24264537aa19": {
+                "col": 1,
+                "row": 8,
+                "height": 4,
+                "width": "Infinity"
+              },
+              "5958aa37-e2b7-4833-8b64-a4b2fdb07aa0": {
+                "col": 1,
+                "row": 5,
+                "height": 3,
+                "width": "Infinity"
+              },
+              "366ce964-4b22-452a-bd49-101342773875": {
+                "col": 1,
+                "row": 1,
+                "height": 4,
+                "width": 9
+              }
+            },
+            "formatting": {
+              "highlighting": []
+            },
+            "display_mode_settings": {
+              "positions": {}
+            }
+          }
+        },
+        "properties": [],
+        "owner": "admin",
+        "title": {
+          "@type": "string",
+          "@value": "Unbound DNS Awareness"
+        },
+        "type": "DASHBOARD",
+        "description": {
+          "@type": "string",
+          "@value": "Understand DNS Activity"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
     {
       "v": "1",
       "type": {
@@ -505,6 +1049,1685 @@
       "data": {
         "name": "IPORHOST",
         "pattern": "(?:%{IP}|%{HOSTNAME})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3b605768-5025-4d66-bf48-f67fe04690f3",
+      "data": {
+        "name": "DNS_ANSWER_1",
+        "pattern": "%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e3aa511a-d31f-49e8-ba6e-0077661de285",
+      "data": {
+        "name": "DNS_ANSWER_2",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e3aa392d-f160-423a-8817-c9caf619300d",
+      "data": {
+        "name": "DNS_ANSWER_4",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c8de534a-a79f-4e6b-a0fe-7f3cb9ea81af",
+      "data": {
+        "name": "DNS_ANSWER_3",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c70d2f63-95d9-441f-aa8c-0de3e9bf998a",
+      "data": {
+        "name": "DNS_ANSWER_5",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d3efe07a-6859-45dc-b69f-3ea2c6dc4c70",
+      "data": {
+        "name": "DNS_ANSWER_6",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f675762a-9142-4862-8ea3-dd50dad48aa1",
+      "data": {
+        "name": "DNS_ANSWER_8",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "67f6c051-298a-4379-8322-5285361e80da",
+      "data": {
+        "name": "DNS_ANSWER_7",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "fc72b2a4-b752-4b9f-9528-ee379950bb4e",
+      "data": {
+        "name": "DNS_ANSWER_10",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6470dd34-88ac-49e4-9a85-07381d553536",
+      "data": {
+        "name": "DNS_ANSWER_9",
+        "pattern": "%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}\\n%{DNS_ANSWER_LINE}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d095fe66-fcfd-40bd-8d1c-60ca47befb5b",
+      "data": {
+        "name": "UNBOUND_SYSLOG_RAW_RESPONSE",
+        "pattern": "%{UNBOUND_SYSLOG}.*%{DNS_RESPONSE:raw_dns_response}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "46961b6b-2608-4910-9b83-3074ad367f83",
+      "data": {
+        "name": "SYSLOGHOST",
+        "pattern": "%{IPORHOST}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ed283abf-9d29-4b3d-b19a-519b6e6c5c77",
+      "data": {
+        "name": "WORD",
+        "pattern": "\\b\\w+\\b"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1848c4ec-1671-40e5-ae9a-3abbb6320a22",
+      "data": {
+        "name": "HOSTNAME",
+        "pattern": "\\b(?:[0-9A-Za-z][0-9A-Za-z-]{0,62})(?:\\.(?:[0-9A-Za-z][0-9A-Za-z-]{0,62}))*(\\.?|\\b)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "055d410b-eaeb-4018-9f56-9a1279aa2cb5",
+      "data": {
+        "name": "USERNAME",
+        "pattern": "[a-zA-Z0-9._-]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "20c44373-ce28-4c98-a1fb-9dd240d91bb1",
+      "data": {
+        "name": "INT",
+        "pattern": "(?:[+-]?(?:[0-9]+))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "70fba972-602c-49a6-a329-2cbac5e92958",
+      "data": {
+        "name": "IP",
+        "pattern": "(?:%{IPV6}|%{IPV4})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b942ffe0-c082-4620-b080-ef58d28f196b",
+      "data": {
+        "name": "DNS_ANSWER_LINE",
+        "pattern": "%{HOSTNAME:a_query}.\\s+%{INT:ttl}\\s+%{WORD:a_type}\\s+%{WORD:a_record}\\s+(?:%{IP:a_response}|%{HOSTNAME:a_response}(?:.))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2c336fe5-ec3d-4f6b-93d9-5b121ebaba10",
+      "data": {
+        "name": "DNS_RESPONSE",
+        "pattern": ";; ->>HEADER<<- opcode: %{WORD:opcode}, rcode: %{WORD:rcode}, id: %{INT:query_id}\\n;; flags: %{GREEDYDATA:flags} ; QUERY: %{INT:num_query}, ANSWER: %{INT:num_answer}, AUTHORITY: %{INT:num_authority}, ADDITIONAL: %{INT:num_additional} \\n;; QUESTION SECTION:%{TRUEGREEDYDATA: question_section}\\n;; ANSWER SECTION:%{TRUEGREEDYDATA: answer_section}\\n;; AUTHORITY SECTION:%{TRUEGREEDYDATA: authority_section}\\n;; ADDITIONAL SECTION:%{TRUEGREEDYDATA: additional_section}\\n;; MSG SIZE  rcvd: %{INT: dns_response_sz}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f70beb7f-c143-47cb-93ea-bdb91245a47f",
+      "data": {
+        "name": "UNBOUND_SYSLOG",
+        "pattern": "%{SYSLOGHOST} %{USERNAME:daemon}: \\[%{INT:pid}:%{INT}\\] %{LOGLEVEL:log_level}:"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "583e6060-e0b6-4f6c-8cd1-d5bca2c26906",
+      "data": {
+        "name": "IPORHOST",
+        "pattern": "(?:%{IP}|%{HOSTNAME})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8d6a80d3-525e-48e5-a244-d36313ec1856",
+      "data": {
+        "name": "IPV6",
+        "pattern": "((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6e59e3dd-0b0b-47c8-a936-ccc882b7e627",
+      "data": {
+        "name": "IPV4",
+        "pattern": "(?<![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2daec3c5-a586-48e6-93e3-4c8a3a40f69f",
+      "data": {
+        "name": "GREEDYDATA",
+        "pattern": ".*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8b95e7e0-e14c-4771-b4f3-187b8e7d476c",
+      "data": {
+        "name": "TRUEGREEDYDATA",
+        "pattern": "(.|\\r|\\n)*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "532943a1-c995-438e-9db0-bbfe5557fb65",
+      "data": {
+        "name": "LOGLEVEL",
+        "pattern": "([Aa]lert|ALERT|[Tt]race|TRACE|[Dd]ebug|DEBUG|[Nn]otice|NOTICE|[Ii]nfo|INFO|[Ww]arn?(?:ing)?|WARN?(?:ING)?|[Ee]rr?(?:or)?|ERR?(?:OR)?|[Cc]rit?(?:ical)?|CRIT?(?:ICAL)?|[Ff]atal|FATAL|[Ss]evere|SEVERE|EMERG(?:ENCY)?|[Ee]merg(?:ency)?)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "input",
+        "version": "1"
+      },
+      "id": "cce3f8e2-fa75-4de7-b87a-c4898db3ea09",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Syslog Input"
+        },
+        "configuration": {
+          "expand_structured_data": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "recv_buffer_size": {
+            "@type": "integer",
+            "@value": 1048576
+          },
+          "port": {
+            "@type": "integer",
+            "@value": 514
+          },
+          "number_worker_threads": {
+            "@type": "integer",
+            "@value": 8
+          },
+          "force_rdns": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "allow_override_date": {
+            "@type": "boolean",
+            "@value": true
+          },
+          "bind_address": {
+            "@type": "string",
+            "@value": "0.0.0.0"
+          },
+          "store_full_message": {
+            "@type": "boolean",
+            "@value": false
+          }
+        },
+        "static_fields": {},
+        "type": {
+          "@type": "string",
+          "@value": "org.graylog2.inputs.syslog.udp.SyslogUDPInput"
+        },
+        "global": {
+          "@type": "boolean",
+          "@value": false
+        },
+        "extractors": [
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 5
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_1}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_1"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,1}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 6
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_2}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_2"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,3}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 8
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_4}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_4"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,2}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 7
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_3}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_3"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,4}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 9
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_5}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_5"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,5}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 10
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_6}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_6"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,7}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 12
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_8}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_8"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,6}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 11
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_7}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_7"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,7}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 14
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_10}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_10"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "\\A([^\\n]*\\n){0,8}[^\\n]*\\Z"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 13
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{DNS_ANSWER_9}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "answer_section"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "DNS_ANSWERS_9"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "^.*;; ->>HEADER<<- opcode:.*\\n"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 0
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{UNBOUND_SYSLOG_RAW_RESPONSE}"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "Unbound DNS Response"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": "lookup_type"
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": ".*msg from cache lookup ;; ->>HEADER<<-"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 0
+            },
+            "converters": [
+              {
+                "type": {
+                  "@type": "string",
+                  "@value": "TOKENIZER"
+                },
+                "configuration": {}
+              }
+            ],
+            "configuration": {
+              "regex_value": {
+                "@type": "string",
+                "@value": ".*msg from (cache) lookup.*"
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "Lookup Source: Cache"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": "lookup_source"
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": "^.*incoming scrubbed packet.* ;; ->>HEADER<<-.*\\n"
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 0
+            },
+            "converters": [],
+            "configuration": {
+              "regex_value": {
+                "@type": "string",
+                "@value": ".*incoming scrubbed (packet).* ;; ->>HEADER<<-"
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "Lookup Source: Packet"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "REGEX"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": ""
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 0
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{SYSLOGHOST} %{USERNAME:daemon}: \\[%{INT:pid}:%{INT}\\] info:\\s+resolving\\s+%{HOSTNAME:q_query}(?:.)\\s+%{WORD:q_record}\\s+%{WORD:q_type}"
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "Unbound DNS Resolution"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "NONE"
+            }
+          },
+          {
+            "target_field": {
+              "@type": "string",
+              "@value": ""
+            },
+            "condition_value": {
+              "@type": "string",
+              "@value": ""
+            },
+            "order": {
+              "@type": "integer",
+              "@value": 1
+            },
+            "converters": [],
+            "configuration": {
+              "grok_pattern": {
+                "@type": "string",
+                "@value": "%{SYSLOGHOST} %{USERNAME:daemon}: \\[%{INT:pid}:%{INT}\\] info:\\s+%{IP:src_ip}\\s+%{HOSTNAME:q_query}(?:.)\\s+%{WORD:q_record}\\s+%{WORD:q_type}$"
+              },
+              "named_captures_only": {
+                "@type": "boolean",
+                "@value": true
+              }
+            },
+            "source_field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "title": {
+              "@type": "string",
+              "@value": "Unbound DNS Client Request"
+            },
+            "type": {
+              "@type": "string",
+              "@value": "GROK"
+            },
+            "cursor_strategy": {
+              "@type": "string",
+              "@value": "COPY"
+            },
+            "condition_type": {
+              "@type": "string",
+              "@value": "NONE"
+            }
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline",
+        "version": "1"
+      },
+      "id": "96be90ad-652c-404b-882a-a1dcdf480c5e",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Unbound Pipeline"
+        },
+        "description": {
+          "@type": "string",
+          "@value": "Pipeline for handling Unbound DNS Syslog messages"
+        },
+        "source": {
+          "@type": "string",
+          "@value": "pipeline \"Unbound Pipeline\"\nstage 0 match either\nend"
+        },
+        "connected_streams": [
+          {
+            "@type": "string",
+            "@value": "d80c30ca-ec6a-429d-8ab7-d0f91f049a75"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=3.3.0+4ea5649"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "stream",
+        "version": "1"
+      },
+      "id": "d80c30ca-ec6a-429d-8ab7-d0f91f049a75",
+      "data": {
+        "alarm_callbacks": [],
+        "outputs": [],
+        "remove_matches": {
+          "@type": "boolean",
+          "@value": false
+        },
+        "title": {
+          "@type": "string",
+          "@value": "Unbound DNS"
+        },
+        "stream_rules": [
+          {
+            "type": {
+              "@type": "string",
+              "@value": "EXACT"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "source"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "destiny.thecoverofnight.com"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": false
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "CONTAINS"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "unbound: "
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": false
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*info: average recursion processing time"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": "Ignore messages with \"average recursion processing time\""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*using localzone"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": "Ignore messages with \"debug: using localzone . transparent\""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*mesh_run"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": "Ignore message for mesh_run"
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "EXACT"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: answer from the cache failed"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": "Ignore debug messages"
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: iter_handle processing"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: comm point"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "unbound:.*debug:\\s+rtt="
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: forwarding request"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: attempt to get extra"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: iter_handle processing"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*request has dependency depth of"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*(info|debug): processQueryTargets:"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*info: DelegationPoint"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*debug: cache memory msg"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "unbound:.*debug: (selrtt|open|closed|process_request|iterator|outnet|EDNS|remote control)"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          },
+          {
+            "type": {
+              "@type": "string",
+              "@value": "REGEX"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "message"
+            },
+            "value": {
+              "@type": "string",
+              "@value": ".*unbound:.*info: (average|resolving|finishing|0RDd|query|iterator|histogram)"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": true
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          }
+        ],
+        "alert_conditions": [],
+        "matching_type": {
+          "@type": "string",
+          "@value": "AND"
+        },
+        "disabled": {
+          "@type": "boolean",
+          "@value": false
+        },
+        "description": {
+          "@type": "string",
+          "@value": "DNS Message"
+        },
+        "default_stream": {
+          "@type": "boolean",
+          "@value": false
+        }
       },
       "constraints": [
         {
